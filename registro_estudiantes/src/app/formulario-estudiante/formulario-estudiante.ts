@@ -131,4 +131,10 @@ export class FormularioEstudianteComponent implements OnChanges {
     });
     this.carneOriginal = null;
   }
+
+    modoOscuro: boolean = false;
+    
+    toggleModoOscuro() {
+      this.modoOscuro = !this.modoOscuro;
+    }
 }

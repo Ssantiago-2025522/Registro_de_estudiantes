@@ -1,147 +1,154 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="formulario-estudiante" novalidate>
+<div class="formulario-contenedor" [class.modo-oscuro]="modoOscuro">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="formulario-estudiante" novalidate>
 
-  <h2>{{ modoEdicion ? 'Editar estudiante' : 'Registrar estudiante' }}</h2>
+  <!-- Cambiar Tema-->
+  <button type="button" class="btn-toggle-tema" (click)="toggleModoOscuro()">
+    {{modoOscuro ? 'Modo Claro' : 'Modo Oscuro'}}
+  </button>
+  
+    <h2>{{ modoEdicion ? 'Editar estudiante' : 'Registrar estudiante' }}</h2>
 
-  <!-- Nombre completo -->
-  <div class="campo">
-    <label for="nombreCompleto">Nombre completo <span class="obligatorio">*</span></label>
-    <input
-      id="nombreCompleto"
-      type="text"
-      formControlName="nombreCompleto"
-      [class.campo-invalido]="f['nombreCompleto'].invalid && (f['nombreCompleto'].touched || f['nombreCompleto'].dirty)"
-      placeholder="Ej. María Fernández López">
-    <small class="error" *ngIf="f['nombreCompleto'].invalid && (f['nombreCompleto'].touched || f['nombreCompleto'].dirty)">
-      <span *ngIf="f['nombreCompleto'].errors?.['required']">El nombre completo es obligatorio.</span>
-      <span *ngIf="f['nombreCompleto'].errors?.['minlength']">Debe tener al menos 5 caracteres.</span>
-    </small>
-  </div>
-
-  <!-- Número de carné -->
-  <div class="campo">
-    <label for="numeroCarne">Número de carné <span class="obligatorio">*</span></label>
-    <input
-      id="numeroCarne"
-      type="text"
-      formControlName="numeroCarne"
-      [class.campo-invalido]="f['numeroCarne'].invalid && (f['numeroCarne'].touched || f['numeroCarne'].dirty)"
-      placeholder="Ej. 20231234">
-    <small class="error" *ngIf="f['numeroCarne'].invalid && (f['numeroCarne'].touched || f['numeroCarne'].dirty)">
-      <span *ngIf="f['numeroCarne'].errors?.['required']">El número de carné es obligatorio.</span>
-      <span *ngIf="f['numeroCarne'].errors?.['minlength']">Debe tener al menos 5 caracteres.</span>
-      <span *ngIf="f['numeroCarne'].errors?.['maxlength']">Debe tener máximo 10 caracteres.</span>
-      <span *ngIf="f['numeroCarne'].errors?.['carneDuplicado']">Ya existe un estudiante con este carné.</span>
-    </small>
-  </div>
-
-  <!-- Correo electrónico -->
-  <div class="campo">
-    <label for="correo">Correo electrónico <span class="obligatorio">*</span></label>
-    <input
-      id="correo"
-      type="email"
-      formControlName="correo"
-      [class.campo-invalido]="f['correo'].invalid && (f['correo'].touched || f['correo'].dirty)"
-      placeholder="ejemplo@correo.com">
-    <small class="error" *ngIf="f['correo'].invalid && (f['correo'].touched || f['correo'].dirty)">
-      <span *ngIf="f['correo'].errors?.['required']">El correo electrónico es obligatorio.</span>
-      <span *ngIf="f['correo'].errors?.['email']">Ingrese un correo electrónico válido.</span>
-    </small>
-  </div>
-
-  <!-- Edad -->
-  <div class="campo">
-    <label for="edad">Edad <span class="obligatorio">*</span></label>
-    <input
-      id="edad"
-      type="number"
-      formControlName="edad"
-      [class.campo-invalido]="f['edad'].invalid && (f['edad'].touched || f['edad'].dirty)"
-      placeholder="Ej. 19">
-    <small class="error" *ngIf="f['edad'].invalid && (f['edad'].touched || f['edad'].dirty)">
-      <span *ngIf="f['edad'].errors?.['required']">La edad es obligatoria.</span>
-      <span *ngIf="f['edad'].errors?.['min']">La edad mínima permitida es 14 años.</span>
-      <span *ngIf="f['edad'].errors?.['max']">La edad máxima permitida es 25 años.</span>
-    </small>
-  </div>
-
-  <!-- Carrera -->
-  <div class="campo">
-    <label for="carrera">Carrera <span class="obligatorio">*</span></label>
-    <select
-      id="carrera"
-      formControlName="carrera"
-      [class.campo-invalido]="f['carrera'].invalid && (f['carrera'].touched || f['carrera'].dirty)">
-      <option value="" disabled>Seleccione una carrera</option>
-      <option *ngFor="let carrera of carreras" [value]="carrera">{{ carrera }}</option>
-    </select>
-    <small class="error" *ngIf="f['carrera'].invalid && (f['carrera'].touched || f['carrera'].dirty)">
-      Debe seleccionar una carrera.
-    </small>
-  </div>
-
-  <!-- Jornada -->
-  <div class="campo">
-    <label>Jornada <span class="obligatorio">*</span></label>
-    <div class="opciones-radio">
-      <label *ngFor="let jornada of jornadas" class="opcion-radio">
-        <input type="radio" formControlName="jornada" [value]="jornada">
-        {{ jornada }}
-      </label>
+    <!-- Nombre completo -->
+    <div class="campo">
+      <label for="nombreCompleto">Nombre completo <span class="obligatorio">*</span></label>
+      <input
+        id="nombreCompleto"
+        type="text"
+        formControlName="nombreCompleto"
+        [class.campo-invalido]="f['nombreCompleto'].invalid && (f['nombreCompleto'].touched || f['nombreCompleto'].dirty)"
+        placeholder="Ej. María Fernández López">
+      <small class="error" *ngIf="f['nombreCompleto'].invalid && (f['nombreCompleto'].touched || f['nombreCompleto'].dirty)">
+        <span *ngIf="f['nombreCompleto'].errors?.['required']">El nombre completo es obligatorio.</span>
+        <span *ngIf="f['nombreCompleto'].errors?.['minlength']">Debe tener al menos 5 caracteres.</span>
+      </small>
     </div>
-    <small class="error" *ngIf="f['jornada'].invalid && (f['jornada'].touched || f['jornada'].dirty)">
-      Debe seleccionar una jornada.
-    </small>
-  </div>
 
-  <!-- Fecha de nacimiento -->
-  <div class="campo">
-    <label for="fechaNacimiento">Fecha de nacimiento <span class="obligatorio">*</span></label>
-    <input
-      id="fechaNacimiento"
-      type="date"
-      formControlName="fechaNacimiento"
-      [class.campo-invalido]="f['fechaNacimiento'].invalid && (f['fechaNacimiento'].touched || f['fechaNacimiento'].dirty)">
-    <small class="error" *ngIf="f['fechaNacimiento'].invalid && (f['fechaNacimiento'].touched || f['fechaNacimiento'].dirty)">
-      La fecha de nacimiento es obligatoria.
-    </small>
-  </div>
+    <!-- Número de carné -->
+    <div class="campo">
+      <label for="numeroCarne">Número de carné <span class="obligatorio">*</span></label>
+      <input
+        id="numeroCarne"
+        type="text"
+        formControlName="numeroCarne"
+        [class.campo-invalido]="f['numeroCarne'].invalid && (f['numeroCarne'].touched || f['numeroCarne'].dirty)"
+        placeholder="Ej. 20231234">
+      <small class="error" *ngIf="f['numeroCarne'].invalid && (f['numeroCarne'].touched || f['numeroCarne'].dirty)">
+        <span *ngIf="f['numeroCarne'].errors?.['required']">El número de carné es obligatorio.</span>
+        <span *ngIf="f['numeroCarne'].errors?.['minlength']">Debe tener al menos 5 caracteres.</span>
+        <span *ngIf="f['numeroCarne'].errors?.['maxlength']">Debe tener máximo 10 caracteres.</span>
+        <span *ngIf="f['numeroCarne'].errors?.['carneDuplicado']">Ya existe un estudiante con este carné.</span>
+      </small>
+    </div>
 
-  <!-- Teléfono -->
-  <div class="campo">
-    <label for="telefono">Teléfono <span class="obligatorio">*</span></label>
-    <input
-      id="telefono"
-      type="text"
-      formControlName="telefono"
-      maxlength="8"
-      [class.campo-invalido]="f['telefono'].invalid && (f['telefono'].touched || f['telefono'].dirty)"
-      placeholder="Ej. 55512345">
-    <small class="error" *ngIf="f['telefono'].invalid && (f['telefono'].touched || f['telefono'].dirty)">
-      <span *ngIf="f['telefono'].errors?.['required']">El teléfono es obligatorio.</span>
-      <span *ngIf="f['telefono'].errors?.['pattern']">El teléfono debe tener exactamente 8 dígitos.</span>
-    </small>
-  </div>
+    <!-- Correo electrónico -->
+    <div class="campo">
+      <label for="correo">Correo electrónico <span class="obligatorio">*</span></label>
+      <input
+        id="correo"
+        type="email"
+        formControlName="correo"
+        [class.campo-invalido]="f['correo'].invalid && (f['correo'].touched || f['correo'].dirty)"
+        placeholder="ejemplo@correo.com">
+      <small class="error" *ngIf="f['correo'].invalid && (f['correo'].touched || f['correo'].dirty)">
+        <span *ngIf="f['correo'].errors?.['required']">El correo electrónico es obligatorio.</span>
+        <span *ngIf="f['correo'].errors?.['email']">Ingrese un correo electrónico válido.</span>
+      </small>
+    </div>
 
-  <!-- Aceptar reglamento -->
-  <div class="campo campo-checkbox">
-    <label class="opcion-checkbox">
-      <input type="checkbox" formControlName="aceptaReglamento">
-      Acepto el reglamento de la institución <span class="obligatorio">*</span>
-    </label>
-    <small class="error" *ngIf="f['aceptaReglamento'].invalid && (f['aceptaReglamento'].touched || f['aceptaReglamento'].dirty)">
-      Debe aceptar el reglamento para continuar.
-    </small>
-  </div>
+    <!-- Edad -->
+    <div class="campo">
+      <label for="edad">Edad <span class="obligatorio">*</span></label>
+      <input
+        id="edad"
+        type="number"
+        formControlName="edad"
+        [class.campo-invalido]="f['edad'].invalid && (f['edad'].touched || f['edad'].dirty)"
+        placeholder="Ej. 19">
+      <small class="error" *ngIf="f['edad'].invalid && (f['edad'].touched || f['edad'].dirty)">
+        <span *ngIf="f['edad'].errors?.['required']">La edad es obligatoria.</span>
+        <span *ngIf="f['edad'].errors?.['min']">La edad mínima permitida es 14 años.</span>
+        <span *ngIf="f['edad'].errors?.['max']">La edad máxima permitida es 25 años.</span>
+      </small>
+    </div>
 
-  <!-- Acciones -->
-  <div class="acciones">
-    <button type="submit" class="btn btn-primario">
-      {{ modoEdicion ? 'Actualizar estudiante' : 'Guardar estudiante' }}
-    </button>
-    <button type="button" class="btn btn-secundario" (click)="onCancelar()">
-      {{ modoEdicion ? 'Cancelar edición' : 'Limpiar formulario' }}
-    </button>
-  </div>
+    <!-- Carrera -->
+    <div class="campo">
+      <label for="carrera">Carrera <span class="obligatorio">*</span></label>
+      <select
+        id="carrera"
+        formControlName="carrera"
+        [class.campo-invalido]="f['carrera'].invalid && (f['carrera'].touched || f['carrera'].dirty)">
+        <option value="" disabled>Seleccione una carrera</option>
+        <option *ngFor="let carrera of carreras" [value]="carrera">{{ carrera }}</option>
+      </select>
+      <small class="error" *ngIf="f['carrera'].invalid && (f['carrera'].touched || f['carrera'].dirty)">
+        Debe seleccionar una carrera.
+      </small>
+    </div>
 
-</form>
+    <!-- Jornada -->
+    <div class="campo">
+      <label>Jornada <span class="obligatorio">*</span></label>
+      <div class="opciones-radio">
+        <label *ngFor="let jornada of jornadas" class="opcion-radio">
+          <input type="radio" formControlName="jornada" [value]="jornada">
+          {{ jornada }}
+        </label>
+      </div>
+      <small class="error" *ngIf="f['jornada'].invalid && (f['jornada'].touched || f['jornada'].dirty)">
+        Debe seleccionar una jornada.
+      </small>
+    </div>
+
+    <!-- Fecha de nacimiento -->
+    <div class="campo">
+      <label for="fechaNacimiento">Fecha de nacimiento <span class="obligatorio">*</span></label>
+      <input
+        id="fechaNacimiento"
+        type="date"
+        formControlName="fechaNacimiento"
+        [class.campo-invalido]="f['fechaNacimiento'].invalid && (f['fechaNacimiento'].touched || f['fechaNacimiento'].dirty)">
+      <small class="error" *ngIf="f['fechaNacimiento'].invalid && (f['fechaNacimiento'].touched || f['fechaNacimiento'].dirty)">
+        La fecha de nacimiento es obligatoria.
+      </small>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="campo">
+      <label for="telefono">Teléfono <span class="obligatorio">*</span></label>
+      <input
+        id="telefono"
+        type="text"
+        formControlName="telefono"
+        maxlength="8"
+        [class.campo-invalido]="f['telefono'].invalid && (f['telefono'].touched || f['telefono'].dirty)"
+        placeholder="Ej. 55512345">
+      <small class="error" *ngIf="f['telefono'].invalid && (f['telefono'].touched || f['telefono'].dirty)">
+        <span *ngIf="f['telefono'].errors?.['required']">El teléfono es obligatorio.</span>
+        <span *ngIf="f['telefono'].errors?.['pattern']">El teléfono debe tener exactamente 8 dígitos.</span>
+      </small>  
+    </div>
+
+    <!-- Aceptar reglamento -->
+    <div class="campo campo-checkbox">
+      <label class="opcion-checkbox">
+        <input type="checkbox" formControlName="aceptaReglamento">
+        Acepto el reglamento de la institución <span class="obligatorio">*</span>
+      </label>
+      <small class="error" *ngIf="f['aceptaReglamento'].invalid && (f['aceptaReglamento'].touched || f['aceptaReglamento'].dirty)">
+        Debe aceptar el reglamento para continuar.
+      </small>
+    </div>
+
+    <!-- Acciones -->
+    <div class="acciones">
+      <button type="submit" class="btn btn-primario">
+        {{ modoEdicion ? 'Actualizar estudiante' : 'Guardar estudiante' }}
+      </button>
+      <button type="button" class="btn btn-secundario" (click)="onCancelar()">
+        {{ modoEdicion ? 'Cancelar edición' : 'Limpiar formulario' }}
+      </button>
+    </div>
+
+  </form>
+</div>

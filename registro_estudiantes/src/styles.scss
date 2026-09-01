@@ -1,1 +1,138 @@
 /* You can add global styles to this file, and also import other style files */
+@use "sass:color";
+
+// Variables de diseño
+$primary-color: #1e3a8a;
+$secondary-color: #3b82f6;
+$danger-color: #ef4444;
+$success-color: #10b981;
+$bg-color: #f8fafc;
+$text-color: #1e293b;
+$border-radius: 6px;
+
+// Reset y estilos base
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: $bg-color;
+  color: $text-color;
+  line-height: 1.5;
+  padding: 24px;
+}
+
+// Controles de formulario con anidación SCSS
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: $text-color;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  background-color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: $secondary-color;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  }
+}
+
+// Estados de validación de Angular
+.ng-invalid.ng-touched {
+  border-color: $danger-color !important;
+}
+
+.ng-valid.ng-touched {
+  border-color: $success-color !important;
+}
+
+.error-message {
+  color: $danger-color;
+  font-size: 0.8rem;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+// Botones globales y variantes
+button {
+  cursor: pointer;
+  padding: 10px 16px;
+  border: none;
+  border-radius: $border-radius;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s, transform 0.1s;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &[type="submit"], &.btn-primary {
+    background-color: $primary-color;
+    color: #ffffff;
+
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: -8%);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: #e2e8f0;
+    color: $text-color;
+
+    &:hover {
+      background-color: #cbd5e1;
+    }
+  }
+
+  &.btn-danger {
+    background-color: $danger-color;
+    color: #ffffff;
+
+    &:hover {
+      background-color: color.adjust($danger-color, $lightness: -8%);
+    }
+  }
+}
+
+// Tablas globales
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  th {
+    background-color: $primary-color;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  tr:hover {
+    background-color: #f1f5f9;
+  }
+}
