@@ -1,0 +1,59 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-align: center;
+}
+
+.home h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+}
+
+.subtitulo {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #2c2c2c;
+}
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  background-color: #1565c0;
+  color: #fff;
+  text-decoration: none;
+  text-align: left;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.tarjeta:hover {
+  background-color: #0d47a1;
+}
+
+.tarjeta-titulo {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.tarjeta-descripcion {
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #eeeeee;
+}
