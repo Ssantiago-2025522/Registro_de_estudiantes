@@ -1,0 +1,73 @@
+<div class="listado-container">
+ 
+  <!-- SECCIÓN DE BÚSQUEDA Y TOTALES -->
+  <div class="header-acciones">
+    <div class="buscador-box">
+      <label for="busqueda">Buscar estudiante:</label>
+      <div class="input-grupo">
+        <input
+          id="busqueda"
+          type="text"
+           [(ngModel)]="busqueda"
+          (input)="actualizarLista()"
+          placeholder="Buscar por nombre o carné..."
+        />
+        @if (busqueda) {
+          <button type="button" class="btn-limpiar" (click)="limpiarBusqueda()">Limpiar</button>
+        }
+      </div>
+    </div>
+ 
+    <div class="contador-badge">
+      <span>Total de estudiantes: <strong>{{ totalEstudiantes }}</strong></span>
+    </div>
+  </div>
+ 
+  <!-- AVISO SI ESTÁ EDITANDO -->
+  @if (estudianteEditando) {
+    <div class="alerta-edicion">
+      <span>✏️ Editando al estudiante: <strong>{{ estudianteEditando.nombreCompleto }}</strong> (Carné: {{ estudianteEditando.carne }})</span>
+      <button type="button" class="btn-cancelar-edicion" (click)="cancelarEdicion()">Cancelar edición</button>
+    </div>
+  }
+ 
+  <!-- TABLA DE VISUALIZACIÓN -->
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Carné</th>
+          <th>Nombre Completo</th>
+          <th>Correo</th>
+          <th>Edad</th>
+          <th>Carrera</th>
+          <th>Jornada</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (estudiante of estudiantesFiltrados; track estudiante.carne) {
+          <tr>
+            <td>{{ estudiante.carne }}</td>
+            <td>{{ estudiante.nombreCompleto }}</td>
+            <td>{{ estudiante.correo }}</td>
+            <td>{{ estudiante.edad }}</td>
+            <td>{{ estudiante.carrera }}</td>
+            <td>{{ estudiante.jornada }}</td>
+            <td>{{ estudiante.telefono }}</td>
+            <td class="acciones-cell">
+              <button type="button" class="btn btn-editar" (click)="editarEstudiante(estudiante)">Editar</button>
+              <button type="button" class="btn btn-eliminar" (click)="eliminarEstudiante(estudiante)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="empty-message">No se encontraron registros de estudiantes.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+ 
+</div>

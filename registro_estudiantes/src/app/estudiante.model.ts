@@ -1,30 +1,12 @@
-/**
- * Interfaz que representa un registro de estudiante en la aplicación.
- * Es utilizada tanto por el componente de formulario como por el
- * componente de listado (rol "Listado").
- */
 export interface Estudiante {
+  carne: string; // <-- Asegúrate de que exista esta propiedad
   nombreCompleto: string;
-  numeroCarne: string;
+  numeroCarne?: string;
   correo: string;
   edad: number;
   carrera: string;
   jornada: string;
-  /** Formato ISO 'yyyy-MM-dd', compatible con <input type="date"> */
   fechaNacimiento: string;
-  /** Exactamente 8 dígitos numéricos */
   telefono: string;
-  aceptaReglamento: boolean;
+  aceptaReglamento?: boolean;
 }
-
-/** Catálogo fijo de carreras disponibles */
-export const CARRERAS: string[] = [
-  'Informática',
-  'Administración',
-  'Diseño',
-  'Electrónica',
-  'Contabilidad'
-];
-
-/** Catálogo fijo de jornadas disponibles */
-export const JORNADAS: string[] = ['Matutina', 'Vespertina', 'Nocturna'];
