@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use "sass:color";
+
 // Variables de diseño
 $primary-color: #1e3a8a;
 $secondary-color: #3b82f6;
@@ -85,7 +87,7 @@ button {
     color: #ffffff;
 
     &:hover {
-      background-color: darken($primary-color, 8%);
+      background-color: color.adjust($primary-color, $lightness: -8%);
     }
   }
 
@@ -103,7 +105,7 @@ button {
     color: #ffffff;
 
     &:hover {
-      background-color: darken($danger-color, 8%);
+      background-color: color.adjust($danger-color, $lightness: -8%);
     }
   }
 }

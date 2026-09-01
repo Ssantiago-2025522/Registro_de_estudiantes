@@ -1,113 +1,306 @@
+@use "sass:color";
+
+$primary-color: #1e3a8a;
+$secondary-color: #3b82f6;
+$danger-color: #ef4444;
+
+.formulario-contenedor {
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem 1rem;
+  background-color: #f8fafc;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+
+  &.modo-oscuro {
+    background-color: #090d16 !important;
+
+    .formulario-estudiante {
+      background: #0f172a !important;
+      border-color: #334155 !important;
+      color: #f8fafc !important;
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.7);
+
+      h2 {
+        color: #60a5fa !important;
+      }
+
+      .btn-toggle-tema {
+        background-color: #1e293b !important;
+        color: #f8fafc !important;
+        border-color: #334155 !important;
+
+        &:hover {
+          background-color: #334155 !important;
+        }
+      }
+
+      .campo {
+        label {
+          color: #f1f5f9 !important; // Texto de las etiquetas más claro y nítido
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="date"],
+        select {
+          background-color: #1e293b !important;
+          border-color: #334155 !important;
+          color: #f8fafc !important;
+
+          // Placeholder más claro y legible
+          &::placeholder {
+            color: #94a3b8 !important;
+            opacity: 1;
+          }
+
+          &:focus {
+            border-color: $secondary-color !important;
+          }
+        }
+
+        select {
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f1f5f9' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+        }
+
+        .opciones-radio .opcion-radio {
+          color: #f8fafc !important;
+        }
+      }
+
+      .campo-checkbox {
+        background-color: rgba(30, 41, 59, 0.7) !important;
+        border-color: #334155 !important;
+
+        .opcion-checkbox {
+          color: #f8fafc !important;
+        }
+      }
+
+      .acciones {
+        border-top-color: #334155 !important;
+
+        .btn.btn-secundario {
+          background-color: #1e293b !important;
+          color: #f8fafc !important;
+          border: 1px solid #334155 !important;
+
+          &:hover {
+            background-color: #334155 !important;
+          }
+        }
+      }
+    }
+  }
+}
+
 .formulario-estudiante {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 480px;
-  padding: 1.5rem;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 
-.formulario-estudiante h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.25rem;
-  color: #1a1a1a;
-}
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, $primary-color, $secondary-color);
+  }
 
-.campo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
+  .btn-toggle-tema {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 
-.campo label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #2c2c2c;
-}
+    &:hover {
+      background-color: #e2e8f0;
+    }
+  }
 
-.obligatorio {
-  color: #d32f2f;
-}
+  h2 {
+    margin-bottom: 2.25rem;
+    color: $primary-color;
+    font-size: 1.85rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 
-input[type='text'],
-input[type='email'],
-input[type='number'],
-input[type='date'],
-select {
-  padding: 0.5rem 0.65rem;
-  border: 1px solid #c4c4c4;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  font-family: inherit;
-}
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 28px;
+      background-color: $secondary-color;
+      border-radius: 4px;
+    }
+  }
 
-/* Estado inválido: se apoya tanto en las clases automáticas de Angular
-   (ng-invalid.ng-touched) como en la clase manual campo-invalido, que
-   además cubre los <select> y radios que no siempre reciben el foco
-   visual esperado. */
-input.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched,
-.campo-invalido {
-  border-color: #d32f2f;
-  background-color: #fdecea;
-}
+  .campo {
+    margin-bottom: 1.5rem;
 
-.error {
-  color: #d32f2f;
-  font-size: 0.8rem;
-}
+    label {
+      display: block;
+      margin-bottom: 0.55rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
 
-.opciones-radio {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
+      .obligatorio {
+        color: $danger-color;
+        margin-left: 3px;
+        font-weight: 700;
+      }
+    }
 
-.opcion-radio,
-.opcion-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 400;
-  font-size: 0.9rem;
-  color: #2c2c2c;
-}
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 0.85rem 1.15rem;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #ffffff;
+      color: #1e293b;
+      transition: all 0.2s ease;
 
-.campo-checkbox {
-  flex-direction: row;
-  align-items: center;
-}
+      &::placeholder {
+        color: #94a3b8;
+      }
 
-.acciones {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-}
+      &:focus {
+        outline: none;
+        border-color: $secondary-color;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+      }
 
-.btn {
-  padding: 0.55rem 1.2rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease-in-out;
-}
+      &.campo-invalido {
+        border-color: $danger-color !important;
+      }
+    }
 
-.btn-primario {
-  background-color: #1565c0;
-  color: #fff;
-}
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 1.15rem center;
+      background-size: 1.1rem;
+      padding-right: 3rem;
+      cursor: pointer;
+    }
 
-.btn-primario:hover {
-  background-color: #0d47a1;
-}
+    .opciones-radio {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 0.75rem;
 
-.btn-secundario {
-  background-color: #eeeeee;
-  color: #333;
-}
+      .opcion-radio {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-weight: 500;
+        cursor: pointer;
+        color: #1e293b;
+      }
+    }
 
-.btn-secundario:hover {
-  background-color: #dcdcdc;
+    .error {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: $danger-color;
+      font-size: 0.815rem;
+      margin-top: 0.45rem;
+      font-weight: 500;
+
+      &::before {
+        content: '⚠️';
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .campo-checkbox {
+    margin-top: 2rem;
+    background-color: rgba(241, 245, 249, 0.6);
+    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    border: 1px dashed #cbd5e1;
+
+    .opcion-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: #1e293b;
+    }
+
+    .error {
+      margin-top: 0.6rem;
+      margin-left: 2.2rem;
+    }
+  }
+
+  .acciones {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid #e2e8f0;
+
+    .btn {
+      flex: 1;
+      padding: 0.95rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &.btn-primario {
+        background: linear-gradient(135deg, $primary-color, color.adjust($primary-color, $lightness: 10%));
+        color: #ffffff;
+
+        &:hover {
+          box-shadow: 0 6px 15px rgba(30, 58, 138, 0.25);
+        }
+      }
+
+      &.btn-secundario {
+        background-color: #e2e8f0;
+        color: #334155;
+
+        &:hover {
+          background-color: color.adjust(#e2e8f0, $lightness: -4%);
+        }
+      }
+    }
+  }
 }
